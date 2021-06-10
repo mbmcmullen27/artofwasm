@@ -7,3 +7,6 @@ I never knew what this pattern was called
 ```javascript
 (async () => {})();
 ```
+
+^^ https://github.com/tc39/proposal-do-expressions/issues/34
+^^ proposal for a "do while" type syntax for IIFEs 

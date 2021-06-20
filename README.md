@@ -53,3 +53,8 @@ wat2wasm illegal_pop.wat
 // destructure wasm_call and js_call from obj.instance.exports
     ({ wasm_call, js_call } = obj.instance.exports);
 ```
+
+___
+### Chapter 4 - Low-Level Bit Manipulation
+
+    "floating-point numbers have a dedicated sign bit and therefore don't use 2s complement." (pg. 72)

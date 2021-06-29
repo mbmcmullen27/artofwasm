@@ -29,4 +29,66 @@
         (call $len_prefix (i32.const 512))
         (call $len_prefix (i32.const 640))
     )
+
+    (func $byte_copy
+        (param $source i32) (param $dest i32) (param $len i32)
+        (local $last_source_byte i32)
+
+        local.get $source
+        local.get $len
+        i32.add     ;; $source + $len
+
+        local.set $last_source_byte             ;; $last_source_byte = $source + $len
+
+        (loop $copy_loop (block $break
+            local.get $dest ;; push $dest on stack for use in i32.store8 call
+            (i32.load8_u (local.get $source))   ;; load a single byte from $source
+            i32.store8                          ;; store a single byte in $dest
+
+            local.get $dest
+            i32.const 1
+            i32.add
+            local.set $dest                     ;; $dest = $dest + 1
+
+            local.get $source
+            i32.const 1
+            i32.add
+            local.tee $source                   ;; $source = $source + 1
+
+            local.get $last_source_byte
+            i32.eq
+            br_if $break
+            br $copy_loop
+        ))
+    )
+    
+    (func $byte_copy_i64
+        (param $source i32) (param $dest i32) (param $len i32)
+        (local $last_source_byte i32)
+
+        local.get $source
+        local.get $len
+        i32.add
+
+        local.set $last_source_byte
+
+        (loop $copy_loop (block $break
+            (i64.store (local.get$dest) (i64.load (local.get $source)))
+            
+            local.get $dest
+            i32.const 8 
+            i32.add
+            local.set $dest                     ;; $dest = $dest + 8
+
+            local.get $source
+            i32.const 8
+            i32.add
+            local.set $source                   ;; $source = $source + 8
+
+            local.get $last_source_byte
+            i32.ge_u
+            br_if $break
+            br $copy_loop
+        ))
+    )
 )

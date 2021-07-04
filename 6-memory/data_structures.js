@@ -47,7 +47,7 @@ for( let i = 0; i < obj_count; i++ ) {
 
     mem_i32[index + x_offset_i32] = x;
     mem_i32[index + y_offset_i32] = y;
-    mem_i32[index + radius_offset_i32] = radius;
+    mem_i32[index + radius_offset_i32] = r;
 }
 
 ( async () => {

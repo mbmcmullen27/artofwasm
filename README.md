@@ -58,3 +58,13 @@ ___
 ### Chapter 4 - Low-Level Bit Manipulation
 
     "floating-point numbers have a dedicated sign bit and therefore don't use 2s complement." (pg. 72)
+
+### Chapter 7 - Web Applications
+
+ Is [connect](https://www.npmjs.com/package/connect)
+ an express.js product?     
+    
+    These middleware and libraries are officially supported by the Connect/Express team:
+
+(pg.144 [add_message.html](./add_message.html))
+- is there a reason for not declaring add_message_function before assigning? I think this would be hoisted but seems strange to do that on purpose.

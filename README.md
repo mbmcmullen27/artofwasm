@@ -68,3 +68,10 @@ ___
 
 (pg.144 [add_message.html](./add_message.html))
 - is there a reason for not declaring add_message_function before assigning? I think this would be hoisted but seems strange to do that on purpose.
+
+### Chapter 8 - Working with the Canvas
+
+
+    "The canvas element was introduced in 2004 by Applle for itts Safari web browser and adopted as a part of the HTML standard in 2006"
+
+- this is shockingly recent for some reason

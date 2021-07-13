@@ -21,7 +21,7 @@
 
         // This function will be called from a button click and runs
         // the setOutput function in the WebAssembly module.
-        function setNumbers(numbers) {
+        function setNumbers(number) {
             if (output == null) {
                 // if page has not fully loaded return
                 return;
@@ -43,7 +43,7 @@
         function onPageLoad() {
             // when the page load is complete, set the output variable
             // to the element with an id of "output"
-            output = document.etElementById("output");
+            output = document.getElementById("output");
             var message_num = 0;
         }
 

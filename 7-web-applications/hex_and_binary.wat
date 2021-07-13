@@ -13,32 +13,32 @@
     ;; the hexidecimal string pointer, length and data section
     (global $hex_string_ptr i32 (i32.const 384))
     (global $hex_string_len i32 (i32.const 16))
-    (data (i32.const 256) "             0x0")
+    (data (i32.const 384) "             0x0")
 
     ;; the binary string pointer, length and data section
     (global $bin_string_ptr i32 (i32.const 512))
     (global $bin_string_len i32 (i32.const 40))
-    (data (i32.const 256) "0000 0000 0000 0000 0000 0000 0000 0000")
+    (data (i32.const 512) "0000 0000 0000 0000 0000 0000 0000 0000")
 
     ;; the h1 open tag string pointer, length and data section
     (global $h1_open_ptr i32 (i32.const 640))
     (global $h1_open_len i32 (i32.const 4))
-    (data (i32.const 256) "<H1>")
+    (data (i32.const 640) "<H1>")
 
     ;; the h1 close tag string pointer, length and data section
     (global $h1_close_ptr i32 (i32.const 656))
     (global $h1_close_len i32 (i32.const 5))
-    (data (i32.const 256) "</H1>")
+    (data (i32.const 656) "</H1>")
 
     ;; the h4 open tag string pointer, length and data section
     (global $h4_open_ptr i32 (i32.const 672))
     (global $h4_open_len i32 (i32.const 4))
-    (data (i32.const 256) "<H4>")
+    (data (i32.const 672) "<H4>")
 
     ;; the h4 close tag string pointer, length and data section
     (global $h4_close_ptr i32 (i32.const 688))
     (global $h4_close_len i32 (i32.const 5))
-    (data (i32.const 256) "</H4>")
+    (data (i32.const 688) "</H4>")
 
     ;; the output string length and data section
     (global $out_str_ptr i32 (i32.const 1024))
@@ -359,7 +359,7 @@
         global.set $out_str_len
     )
 
-    (func (export "set_output") (param $num i32) (result i32)
+    (func (export "setOutput") (param $num i32) (result i32)
         ;; create a decimal string from $num value
         (call $set_dec_string
             (local.get $num) (global.get $dec_string_len))

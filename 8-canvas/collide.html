@@ -61,8 +61,47 @@
             cnvs_size
         )
 
+        const stride_i32 = stride_bytes/4;
+        for ( i = 0; i < obj_cnt * stride_i32; i += stride_i32 ) {
+            
+            // value less than canvas_size
+            let temp = Math.floor(Math.random() * cnvs_size);
 
+            // set object x attribute to random value
+            mem_i32[obj_start_32 + i] = temp;
 
+            // random value less than canvas_size
+            temp = Math.floor(Math.random() * cnvs_size);
+
+            // set object y attribute to random value
+            mem_i32[obj_start_32 + i + 1] = temp;
+
+            // random value between -2 and 2
+            temp = (Math.round(Math.random() *4) -2);
+
+            // set x velocity to random value
+            mem_i32[obj_start_32 + i + 2] = temp;
+
+            // random value between -2 and 2
+            temp = (Math.round(Math.random() *4) -2);
+
+            // set y velocity to random value
+            mem_i32[obj_start_32 + i + 3] = temp;   
+        }
+
+        var animate_wasm; // the webassembly function we will call every frame
+
+        function animate() {
+            animation_wasm();
+            ctx.putImageData(image_data, 0, 0); // render pixel data
+            requestAnimationFrame(animate);
+        }
+
+        (async () => {
+            let obj = await WebAssembly.instantiateStreaming( fetch('colllide.wasm'), importObject );
+            animation_wasm = obj.instance.exports.main;
+            requestAnimationFrame(animate);
+        })();
     </script>
 </body>
 </html>

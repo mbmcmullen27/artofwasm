@@ -143,4 +143,122 @@
         ))
     )
 
+    (func $set_obj_attr
+        (param $obj_number  i32)
+        (param $attr_offset i32)
+        (param $value       i32)
+
+        local.get $obj_number
+        i32.const 16
+        i32.mul                 ;; 16 byte stride multiplied by the object number
+
+        global.get $obj_start   ;; add the starting byte for the objects (base)
+        i32.add                 ;; ($obj_number*16) + $obj_start
+
+        local.get $attr_offset  ;; add the attribute offset to the address
+        i32.add                 ;; ($obj_number*16) + $obj_start + $attr_offset
+
+        local.get $value
+        
+        ;; strore $value at location ($obj_number*16)+$obj_start+$attr_offset
+        i32.store       
+    )
+
+    (func $get_obj_attr
+        (param $obj_number  i32)
+        (param $attr_offset i32)
+        (result i32)
+
+        local.get $obj_number
+        i32.const 16
+        i32.mul                 ;; $obj_number * 16
+
+        global.get $obj_start
+        i32.add                 ;; ($obj_number*16) + $obj_start
+
+        i32.load                ;; load the pointer above
+        ;; returns the attribute
+    )
+
+    (func $main (export "main")
+        (local $i           i32)    ;; outer loop index
+        (local $j           i32)    ;; inner loop index
+        (local $outer_ptr   i32)    ;; pointer to outer loop object
+        (local $inner_ptr   i32)    ;; pointer to inner loop object
+
+        (local $x1          i32)    ;; outer loop object x coordinate
+        (local $x2          i32)    ;; inner loop object x coordinate
+        (local $y1          i32)    ;; outer loop object y coordinate
+        (local $y2          i32)    ;; inner loop object y coordinate
+
+        (local $xdist       i32)    ;; distance between objects on x axis
+        (local $ydist       i32)    ;; distance between objects on y axis
+
+        (local $i_hit       i32)    ;; i object hit boolean flag
+        (local $xv          i32)    ;; x velocity
+        (local $yv          i32)    ;; y velocity
+
+        (call $clear_canvas)        ;; clear the canvaas to black
+
+        (loop $move_loop
+            ;; get x attribute
+            (call $get_obj_attr (local.get $i) (global.get $x_offset))
+            local.set $x1
+
+            ;; get y attribute
+            (call $get_obj_attr (local.get $i) (global.get $y_offset))
+            local.set $y1
+
+            ;; get x velocity attribute
+            (call $get_obj_attr (local.get  $i) (global.get $xv_offset))
+            local.set $xv
+
+            ;; get y velocity attribute
+            (call $get_ovj_attr (local.get $i) (global.get $yv.offset))
+            local.set $yv
+
+            ;; add velocity to x and force it to stay in the canvas bounds
+            (i32.add (local.get $xv) (local.get $x1))
+            i32.const 0x1ff     ;; 511 in decimal
+            i32.and             ;; clear high-order 23 bits
+            local.set $x1
+
+            ;; add velocity to y and force it to stay in the canvas bounds
+            (i32.add (local.get $yv) (local.get $y1))
+            i32.const 0x1ff     ;; 511 in decimal
+            i32.and             ;; clear high-order 23 bits
+            local.set $y1
+
+            ;; set the x attribute in linear memory
+            (call $set_obj_attr
+                (local.get $i)
+                (global.get $x_offset)
+                (local.get $x1)
+            )
+
+            ;; set the y attribute in linear memory
+            (call $set_obj_attr
+                (local.get $i)
+                (global.get $y_offset)
+                (local.get $y1)
+            )
+
+            local.get $i
+            i32.const 1
+            i32.add
+            local.tee           ;; increment $i
+
+            global.get $obj_cnt
+            i32.lt_u            ;; $i < $obj_cnt
+
+            if  ;; if $i < $obj_count branch back to op of $move_loop
+                br $move_loop
+            end
+        )
+
+        i32.const 0
+        local.set $i
+
+
+    )
 )

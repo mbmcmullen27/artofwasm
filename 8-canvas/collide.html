@@ -17,7 +17,7 @@
         const pixel_count = cnvs_size * cnvs_size;
 
         const canvas = document.getElementById("cnvs");
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, 512, 512);
 
         // the number of bytes needed for that pixel data is the number of pixels * 4
@@ -89,7 +89,7 @@
             mem_i32[obj_start_32 + i + 3] = temp;   
         }
 
-        var animate_wasm; // the webassembly function we will call every frame
+        var animation_wasm; // the webassembly function we will call every frame
 
         function animate() {
             animation_wasm();
@@ -98,7 +98,7 @@
         }
 
         (async () => {
-            let obj = await WebAssembly.instantiateStreaming( fetch('colllide.wasm'), importObject );
+            let obj = await WebAssembly.instantiateStreaming( fetch('collide.wasm'), importObject );
             animation_wasm = obj.instance.exports.main;
             requestAnimationFrame(animate);
         })();

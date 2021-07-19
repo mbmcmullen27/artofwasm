@@ -71,7 +71,11 @@ ___
 
 ### Chapter 8 - Working with the Canvas
 
+    "The canvas element was introduced in 2004 by Apple for itts Safari web browser and adopted as a part of the HTML standard in 2006"
 
-    "The canvas element was introduced in 2004 by Applle for itts Safari web browser and adopted as a part of the HTML standard in 2006"
+^^ This is shockingly recent for some reason
 
-- this is shockingly recent for some reason
+    Games like Atari's _Asteroids_ or Namco's _Pac-Man_ didn't need any extra code to have this effect; instead, their screens were 256 pixels wide and used an 8-bit number to store the x-cordinate. So if a game object had an x-coordinate of 255 and moved one pixel to the right, the single byte value would roll back over to 0, and the game object would reappear on the left side of the screen. (pg.176)
+
+^^ CLEVER! Overflow implementing a feature
+    

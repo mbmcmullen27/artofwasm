@@ -98,7 +98,7 @@
         }
 
         (async () => {
-            let obj = await WebAssembly.instantiateStreaming( fetch('collide.wasm'), importObject );
+            let obj = await WebAssembly.instantiateStreaming( fetch('collide-3.wasm'), importObject );
             animation_wasm = obj.instance.exports.main;
             requestAnimationFrame(animate);
         })();

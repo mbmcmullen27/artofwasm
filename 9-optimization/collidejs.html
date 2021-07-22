@@ -36,7 +36,7 @@
                 this.x += this.xv
                 this.y += this.yv;
                 this.x %= 1024;
-                this.y%= 1024;
+                this.y %= 1024;
             }
 
             draw = () => {
@@ -75,12 +75,12 @@
             }
 
             // loop and render
-            for (i == 0; i < collider_array.length; i++) {
+            for (i = 0; i < collider_array.length; i++) {
                 for(let j = 0; j < collider_array.length; j++) {
                     if(i == j) {
                         continue;
                     }
-                    if(collider_array[i].hitTest(collider_array[i])) {
+                    if(collider_array[i].hitTest(collider_array[j])) {
                         break;
                     }
                 }

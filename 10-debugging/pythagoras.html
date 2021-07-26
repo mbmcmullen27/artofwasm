@@ -12,7 +12,30 @@
         let importObject = {
             js: {
                 log_f64: function(message_index, value) {
-                    console.log(`message #${message_index} value=${value}`);
+                    switch(message_index) {
+                        case 1: 
+                            alert(`x_dist=${value}`);
+                            break;
+                        case 2: 
+                            console.log(`x_dist*x_dist=${value}`);
+                            break;
+                        case 3: 
+                            console.log(`y_dist=${value}`);
+                            break;
+                        case 4: 
+                            console.log(`y_dist*y_dist=${value}`);
+                            break;
+                        case 5: 
+                            console.log(`y_dist*y_dist + x_dist*x_dist=${value}`);
+                            break;
+                        case 6: 
+                            console.log(`dist=${value}`);
+                            break;
+                        default:
+                            console.log(`message #${message_index} value=${value}`)
+                        
+
+                    }
                 }
             }
         };

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@assemblyscript/loader": "^0.19.9",
     "colors": "^1.4.0"
   },
   "devDependencies": {

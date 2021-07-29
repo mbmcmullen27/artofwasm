@@ -35,7 +35,7 @@ let importObject = {
     let obj = await WebAssembly.instantiate(new Uint8Array(bytes), importObject);
 
     // memory object exported from AssemblyScript
-    memory = obj.instance.exports.memroy;
+    memory = obj.instance.exports.memory;
     // call the glubGlub function
     obj.instance.exports.glubGlub();
 })();

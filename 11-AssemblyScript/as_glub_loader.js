@@ -14,4 +14,4 @@ const importObject = {
     let wasm = fs.readFileSync('as_glub.wasm');
     module = await loader.instantiate(wasm, importObject);
     module.exports.glubGlub();
-})
+})();

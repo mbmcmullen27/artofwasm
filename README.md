@@ -66,7 +66,7 @@ ___
     
     These middleware and libraries are officially supported by the Connect/Express team:
 
-(pg.144 [add_message.html](./add_message.html))
+(pg.144 [add_message.html](./7-web-applications/add_message.html))
 - is there a reason for not declaring add_message_function before assigning? I think this would be hoisted but seems strange to do that on purpose.
 
 ### Chapter 8 - Working with the Canvas
@@ -79,3 +79,16 @@ ___
 
 ^^ CLEVER! Overflow implementing a feature
     
+### Chapter 11 - AssemblyScript
+
+    "We then call loader.demangle, passing it the module returned by loader.instantiate. The demangle function returns an object structure that provides us with functions we can use..." (262)
+
+- not seeing this demangle method called anywhere, according to [assemblyscript.org](https://www.assemblyscript.org/loader.html#static-members) its not usually required.
+- it does get called later when we exted Vector2D in [vector_loader.ts](./11-AssemblyScript/vector_loader.ts) and destructure the two exports in [vector_loader.js](./11-AssemblyScript/vector_loader.js), just not in the first version of the module.
+
+- we can kind of guess, but was there an explanation for this anywhere?
+    ```javascript
+        env: {
+            abort: () => {}
+        }
+    ```
